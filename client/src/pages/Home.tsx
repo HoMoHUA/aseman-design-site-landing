@@ -271,7 +271,7 @@ export default function Home() {
       <section className="partners-section" aria-labelledby="partners-title">
         <Reveal className="page-container partners-inner">
           <SectionIntro eyebrow="اعتبار و همکاری" title="همراهان ما" centered />
-          <div className="partners-cascade"><div className="partner-logo-frame partner-row-one"><img src={assets.partner} alt="ردیف اول همراهان گروه نرم‌افزاری آسمان" /></div><div className="partner-marquee partner-row-two" aria-label="ردیف دوم همراهان گروه نرم‌افزاری آسمان"><div className="partner-marquee-track"><img src={assets.partnerFold} alt="" /><img src={assets.partnerFold} alt="" /></div></div><div className="partner-marquee partner-row-three" aria-label="ردیف سوم همراهان گروه نرم‌افزاری آسمان"><div className="partner-marquee-track"><img src={assets.partnerFold} alt="" /><img src={assets.partnerFold} alt="" /></div></div></div>
+          <div className="partners-cascade"><div className="partner-logo-frame partner-row-one"><img src={assets.partner} alt="ردیف اول همراهان گروه نرم‌افزاری آسمان" /></div><div className="partner-marquee partner-row-two" aria-label="ردیف دوم همراهان گروه نرم‌افزاری آسمان"><div className="partner-marquee-track"><span className="partner-band" /><span className="partner-band" /></div></div><div className="partner-marquee partner-row-three" aria-label="ردیف سوم همراهان گروه نرم‌افزاری آسمان"><div className="partner-marquee-track"><span className="partner-band" /><span className="partner-band" /></div></div></div>
         </Reveal>
       </section>
 
