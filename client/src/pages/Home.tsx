@@ -223,10 +223,6 @@ function SectionIntro({ eyebrow, title, text, centered = false }: { eyebrow?: st
   );
 }
 
-function FallingLeaves({ className = "" }: { className?: string }) {
-  return <div className={`falling-leaves ${className}`} aria-hidden="true">{Array.from({ length: 16 }, (_, index) => <span key={index} />)}</div>;
-}
-
 export default function Home() {
   const [parallax, setParallax] = useState({ x: 0, y: 0 });
   const [activeGuideIndex, setActiveGuideIndex] = useState(0);
@@ -275,7 +271,7 @@ export default function Home() {
       <section className="partners-section" aria-labelledby="partners-title">
         <Reveal className="page-container partners-inner">
           <SectionIntro eyebrow="اعتبار و همکاری" title="همراهان ما" centered />
-          <div className="partners-cascade"><div className="partner-logo-frame partner-row-one"><img src={assets.partner} alt="ردیف اول همراهان گروه نرم‌افزاری آسمان" /></div><div className="partner-logo-frame partner-row-fold"><img src={assets.partnerFold} alt="ردیف دوم و سوم همراهان گروه نرم‌افزاری آسمان" /></div></div>
+          <div className="partners-cascade"><div className="partner-logo-frame partner-row-one"><img src={assets.partner} alt="ردیف اول همراهان گروه نرم‌افزاری آسمان" /></div><div className="partner-marquee partner-row-two" aria-label="ردیف دوم همراهان گروه نرم‌افزاری آسمان"><div className="partner-marquee-track"><img src={assets.partnerFold} alt="" /><img src={assets.partnerFold} alt="" /></div></div><div className="partner-marquee partner-row-three" aria-label="ردیف سوم همراهان گروه نرم‌افزاری آسمان"><div className="partner-marquee-track"><img src={assets.partnerFold} alt="" /><img src={assets.partnerFold} alt="" /></div></div></div>
         </Reveal>
       </section>
 
@@ -378,7 +374,6 @@ export default function Home() {
       </section>
 
       <section className="guide-section section-space" id="guide">
-        <FallingLeaves className="leaves-guide" />
         <div className="garden-orb orb-guide-one" aria-hidden="true" /><div className="garden-orb orb-guide-two" aria-hidden="true" />
         <Reveal className="page-container guide-layout">
           <div className="guide-sticky guide-heading-center"><div className="question-orb"><span>؟</span><i /><i /><i /></div><p className="eyebrow"><span /> راهنمای کامل آسمان</p><h2>هر سؤال، شروع یک مسیر روشن است.</h2><p>تمامی نکات مهمی که باید درباره طراحی سایت در مشهد بدانید، از تعرفه و انواع سایت تا فناوری، فرایند همکاری و کسب‌وکارهای مناسب.</p><div className="guide-note"><Sparkles size={18} /><span>یکی از عنوان‌ها را باز کنید و پاسخ متناسب با مسیر کسب‌وکارتان را بخوانید.</span></div><a className="text-link text-link-light" href="#consultation">برای انتخاب مسیر درست، مشاوره بگیرید <ArrowLeft size={18} /></a></div>
@@ -387,13 +382,10 @@ export default function Home() {
       </section>
 
       <section className="faq-section section-space" id="faq">
-        <FallingLeaves className="leaves-faq" />
         <div className="faq-light-beam" aria-hidden="true" />
         <Reveal className="page-container faq-layout">
           <div className="faq-intro"><div className="faq-mark"><span>؟</span><i /><i /></div><p className="eyebrow"><span /> پاسخ به تردیدها</p><h2>سوالات متداول</h2><p>سوالاتی که ممکن است برای شما پیش‌آید</p><div className="faq-side-caption"><span>یک پرسش خوب،</span><strong>شروع یک تصمیم بهتر است.</strong></div></div>
-          <div className="faq-card-wrap"><div className="faq-card-top"><span>پرسش‌های شما</span><div><i /><i /><i /></div></div><Accordion type="single" collapsible defaultValue="faq-0" className="faq-accordion">
-            {faqItems.map((item, index) => <AccordionItem value={`faq-${index}`} key={item.question}><AccordionTrigger><span className="faq-index">{String(index + 1).padStart(2, "0")}</span>{item.question}</AccordionTrigger>{item.answer && <AccordionContent><p>{item.answer}</p></AccordionContent>}</AccordionItem>)}
-          </Accordion></div>
+          <div className="faq-card-wrap"><div className="faq-card-top"><span>پرسش‌های شما</span><div><i /><i /><i /></div></div><div className="faq-native-list">{faqItems.map((item, index) => <details className="faq-native-item" open={index === 0} key={item.question}><summary><span className="faq-index">{String(index + 1).padStart(2, "0")}</span><span>{item.question}</span><b>+</b></summary><div className="faq-native-answer"><p>{item.answer}</p></div></details>)}</div></div>
         </Reveal>
       </section>
 
