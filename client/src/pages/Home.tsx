@@ -264,6 +264,7 @@ export default function Home() {
             <div className="hero-vector-layer vector-layer-back" aria-hidden="true" />
             <div className="hero-vector-layer vector-layer-middle" aria-hidden="true" />
             <div className="hero-vector-layer vector-layer-front" aria-hidden="true" />
+            <div className="hero-ui-layer" aria-hidden="true"><span className="hero-ui-dot" /><span className="hero-ui-line hero-ui-line-wide" /><span className="hero-ui-line" /><div className="hero-ui-cards"><i /><i /><i /></div></div>
             <div className="hero-orbit orbit-one" /><div className="hero-orbit orbit-two" />
             <img src={assets.hero} alt="تصویرسازی سه‌بعدی طراحی سایت حرفه‌ای" />
             <div className="floating-note note-top"><span className="note-icon"><Zap size={16} /></span><div><strong>عملکرد سریع</strong><small>کدنویسی بهینه</small></div></div>
