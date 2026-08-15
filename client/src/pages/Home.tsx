@@ -1,5 +1,6 @@
 /* Design reminder: «اطمینان آبی در سه لایه» — روایت فروش‌محور مرجع، فضای روشن، سرمه‌ای #000838، ماکاپ‌های لایه‌ای و حرکت ظریف؛ بدون هدر و فوتر. */
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { useState, type CSSProperties, type MouseEvent } from "react";
 import {
   ArrowLeft,
   ArrowUpLeft,
@@ -28,7 +29,15 @@ const assets = {
   growth: "/manus-storage/aseman-growth-services_24bfc6d5.png",
   symbol: "/manus-storage/aseman-symbol_16257107.png",
   partner: "/manus-storage/aseman-partner-current_822bd4f3.png",
+  partnerFold: "/manus-storage/aseman-partner-fold_0571f743.png",
 };
+
+const portfolioItems = [
+  { title: "سفارش طراحی سایت در مشهد", type: "خدمات اختصاصی", description: "ساخت یک مسیر حرفه‌ای برای معرفی و رشد کسب‌وکار", image: "/manus-storage/aseman-service-order_f30a26e8.webp" },
+  { title: "طراحی سایت فروشگاهی", type: "فروش آنلاین", description: "فروشگاه سریع، امن و آماده توسعه برای مشتریان شما", image: "/manus-storage/aseman-service-store_ef5634da.webp" },
+  { title: "طراحی سایت حرفه‌ای", type: "برند و تجربه", description: "تجربه‌ای دقیق و متمایز برای مخاطبان برند شما", image: "/manus-storage/aseman-service-pro_e79be7bb.webp" },
+  { title: "سایت شرکتی و صنعتی", type: "معرفی سازمان", description: "نمایش توانمندی‌ها، خدمات و مسیر ارتباط در یک قاب حرفه‌ای", image: "/manus-storage/aseman-service-company_2e015ce8.webp" },
+];
 
 const steps = [
   {
@@ -188,6 +197,9 @@ const detailedLegacySections = [
   },
 ];
 
+const allGuideSections = [...guideSections, ...detailedLegacySections].map((section, index) => ({ ...section, index }));
+const guideColumns = [allGuideSections.filter((_, index) => index % 2 === 0), allGuideSections.filter((_, index) => index % 2 === 1)];
+
 function Reveal({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <motion.div
@@ -217,8 +229,15 @@ function FallingLeaves({ className = "" }: { className?: string }) {
 }
 
 export default function Home() {
+  const [parallax, setParallax] = useState({ x: 0, y: 0 });
+  const parallaxStyle = { "--px": `${parallax.x}px`, "--py": `${parallax.y}px` } as CSSProperties;
+  const handleParallax = (event: MouseEvent<HTMLElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    setParallax({ x: ((event.clientX - rect.left) / rect.width - .5) * 14, y: ((event.clientY - rect.top) / rect.height - .5) * 12 });
+  };
+
   return (
-    <main dir="rtl" className="site-shell">
+    <main dir="rtl" className="site-shell" style={parallaxStyle} onMouseMove={handleParallax} onMouseLeave={() => setParallax({ x: 0, y: 0 })}>
       <section className="hero-section" aria-labelledby="hero-title">
         <div className="hero-grain" />
         <div className="hero-ring hero-ring-one" />
@@ -242,7 +261,7 @@ export default function Home() {
               <span><CheckCircle2 size={17} /> پشتیبانی همراه</span>
             </div>
           </Reveal>
-          <Reveal className="hero-art">
+          <Reveal className="hero-art parallax-hero">
             <div className="hero-art-backdrop" />
             <div className="hero-orbit orbit-one" /><div className="hero-orbit orbit-two" />
             <img src={assets.hero} alt="تصویرسازی سه‌بعدی طراحی سایت حرفه‌ای" />
@@ -255,7 +274,7 @@ export default function Home() {
       <section className="partners-section" aria-labelledby="partners-title">
         <Reveal className="page-container partners-inner">
           <SectionIntro eyebrow="اعتبار و همکاری" title="همراهان ما" centered />
-          <div className="partner-logo-frame"><img src={assets.partner} alt="همراهان گروه نرم‌افزاری آسمان" /></div>
+          <div className="partners-cascade"><div className="partner-logo-frame partner-row-one"><img src={assets.partner} alt="ردیف اول همراهان گروه نرم‌افزاری آسمان" /></div><div className="partner-logo-frame partner-row-fold"><img src={assets.partnerFold} alt="ردیف دوم و سوم همراهان گروه نرم‌افزاری آسمان" /></div></div>
         </Reveal>
       </section>
 
@@ -266,7 +285,7 @@ export default function Home() {
             <a className="text-link" href="#consultation">برای پروژه‌تان مشاوره بگیرید <ArrowLeft size={18} /></a>
             <div className="integration-pills"><span>درگاه پرداخت</span><span>پیامک</span><span>CRM</span><span>تحلیل</span></div>
           </div>
-          <div className="media-panel media-panel-orbit"><img src={assets.integrations} alt="تصویرسازی اتصال سایت به ابزارهای کسب‌وکار" /></div>
+          <div className="media-panel media-panel-orbit parallax-panel"><img src={assets.integrations} alt="تصویرسازی اتصال سایت به ابزارهای کسب‌وکار" /></div>
         </Reveal>
       </section>
 
@@ -299,7 +318,7 @@ export default function Home() {
 
       <section className="management-section section-space">
         <Reveal className="page-container split-layout split-reverse">
-          <div className="media-panel dashboard-panel"><img src={assets.dashboard} alt="ماکاپ پنل مدیریت سایت" /></div>
+          <div className="media-panel dashboard-panel parallax-panel"><img src={assets.dashboard} alt="ماکاپ پنل مدیریت سایت" /></div>
           <div className="split-copy">
             <SectionIntro eyebrow="مدیریت بی‌دردسر" title="مدیریت سایتتان باید ساده باشد، نه وابسته." text="برای راه‌اندازی و مدیریت وب‌سایت، نباید درگیر پیچیدگی‌های فنی شوید. پنل مدیریت مناسب به شما امکان می‌دهد محتوا، بخش‌های قابل ویرایش، فرم‌ها و اطلاعات ضروری سایت را متناسب با نیاز پروژه به‌روزرسانی کنید." />
             <a className="button button-primary button-small" href="#features">امکانات سایت حرفه‌ای <ArrowLeft size={17} /></a>
@@ -330,14 +349,9 @@ export default function Home() {
         <Reveal className="page-container">
           <SectionIntro eyebrow="پروژه‌هایی با هدف واقعی" title="نمونه‌کارهای طراحی سایت آسمان" text="هر پروژه فرصتی است تا با دقت و خلاقیت، سایتی منحصربه‌فرد برای یک کسب‌وکار بسازیم؛ سایتی که علاوه بر ظاهر حرفه‌ای، عملکرد و تجربه کاربری مناسبی هم داشته باشد." />
           <div className="portfolio-rail">
-            {[
-              ["فروشگاهی", "فروش آنلاین با مسیر خرید روشن و قابل توسعه"],
-              ["شرکتی", "معرفی دقیق خدمات، توانمندی‌ها و مسیر تماس"],
-              ["خدماتی", "تبدیل بازدیدکننده به درخواست و گفت‌وگو"],
-              ["آموزشی", "ساختاری منظم برای دوره‌ها و محتوای آموزشی"],
-            ].map(([type, description], index) => <article className={`portfolio-card portfolio-card-${index + 1}`} key={type}><div className="portfolio-browser"><span /><span /><span /></div><div className="portfolio-art"><div /><div /><i /><i /></div><div className="portfolio-info"><p>{type}</p><h3>طراحی سایت {type}</h3><span>{description}</span><a href="#contact" aria-label={`مشاهده نمونه‌های طراحی سایت ${type}`}><ArrowUpLeft size={19} /></a></div></article>)}
+            {portfolioItems.map((item, index) => <motion.article className={`portfolio-card parallax-card portfolio-card-${index + 1}`} key={item.title} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * .08, duration: .48 }}><div className="portfolio-browser"><span /><span /><span /></div><div className="portfolio-art"><img src={item.image} alt={item.title} /><div className="portfolio-sheen" /></div><div className="portfolio-info"><p>{item.type}</p><h3>{item.title}</h3><span>{item.description}</span><a href="#consultation" aria-label={`مشاهده نمونه‌های ${item.title}`}><ArrowUpLeft size={19} /></a></div></motion.article>)}
           </div>
-          <a className="button button-secondary portfolio-cta" href="#contact">مشاهده نمونه‌کارهای بیشتر <ArrowLeft size={18} /></a>
+          <a className="button button-secondary portfolio-cta" href="#consultation">مشاهده نمونه‌کارهای بیشتر <ArrowLeft size={18} /></a>
         </Reveal>
       </section>
 
@@ -347,7 +361,7 @@ export default function Home() {
             <SectionIntro eyebrow="همراه در تمام مسیر" title="از ایده تا رشد آنلاین، کنار شما هستیم." text="در گروه نرم‌افزاری آسمان، طراحی سایت فقط شروع مسیر است. از تحلیل نیاز و طراحی رابط کاربری تا توسعه، تست، آموزش مدیریت و پشتیبانی فنی، همکاری طوری پیش می‌رود که وب‌سایت شما همواره سریع، امن و قابل بهبود باقی بماند." />
             <div className="support-checks"><span><CheckCircle2 size={19} /> تیمی متخصص و باتجربه</span><span><CheckCircle2 size={19} /> جدیدترین فناوری‌های وب</span><span><CheckCircle2 size={19} /> قیمت شفاف و متناسب با نیاز</span></div>
           </div>
-          <div className="media-panel support-media"><img src={assets.growth} alt="تصویرسازی خدمات و پشتیبانی مستمر" /></div>
+          <div className="media-panel support-media parallax-panel"><img src={assets.growth} alt="تصویرسازی خدمات و پشتیبانی مستمر" /></div>
         </Reveal>
       </section>
 
@@ -367,9 +381,7 @@ export default function Home() {
         <div className="garden-orb orb-guide-one" aria-hidden="true" /><div className="garden-orb orb-guide-two" aria-hidden="true" />
         <Reveal className="page-container guide-layout">
           <div className="guide-sticky"><div className="question-orb"><span>؟</span><i /><i /><i /></div><p className="eyebrow"><span /> راهنمای کامل آسمان</p><h2>هر سؤال، شروع یک مسیر روشن است.</h2><p>تمامی نکات مهمی که باید درباره طراحی سایت در مشهد بدانید، از تعرفه و انواع سایت تا فناوری، فرایند همکاری و کسب‌وکارهای مناسب.</p><div className="guide-note"><Sparkles size={18} /><span>یکی از عنوان‌ها را باز کنید و پاسخ متناسب با مسیر کسب‌وکارتان را بخوانید.</span></div><a className="text-link text-link-light" href="#consultation">برای انتخاب مسیر درست، مشاوره بگیرید <ArrowLeft size={18} /></a></div>
-          <div className="knowledge-stack"><div className="stack-label"><span>نقشه دانستنی‌ها</span><b>۲۴ پاسخ کاربردی</b></div><Accordion type="single" collapsible className="guide-accordion" defaultValue="guide-0">
-            {[...guideSections, ...detailedLegacySections].map((section, index) => <AccordionItem value={`guide-${index}`} key={section.title}><AccordionTrigger><span className="guide-count">{String(index + 1).padStart(2, "0")}</span>{section.title}</AccordionTrigger><AccordionContent><p>{section.content}</p></AccordionContent></AccordionItem>)}
-          </Accordion></div>
+          <div className="knowledge-stack"><div className="stack-label"><span>نقشه دانستنی‌ها</span><b>۲۴ پاسخ کاربردی</b></div><div className="guide-columns">{guideColumns.map((column, columnIndex) => <Accordion type="single" collapsible className="guide-accordion" defaultValue={columnIndex === 0 ? "guide-0" : undefined} key={columnIndex}>{column.map((section) => <AccordionItem value={`guide-${section.index}`} key={section.title}><AccordionTrigger><span className="guide-count">{String(section.index + 1).padStart(2, "0")}</span>{section.title}</AccordionTrigger><AccordionContent><p>{section.content}</p></AccordionContent></AccordionItem>)}</Accordion>)}</div></div>
         </Reveal>
       </section>
 
