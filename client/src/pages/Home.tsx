@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 
+/* Design reminder: آبی و سرمه‌ای هویت اصلی هستند؛ زرد و نارنجی فقط برای تأکیدهای کوچک، مسیرهای کلیدی و تعامل‌ها استفاده می‌شوند. */
 const assets = {
   hero: "/manus-storage/aseman-hero-layered-studio_39678e1d.png",
   integrations: "/manus-storage/aseman-integrations-orbit_6072153c.png",
@@ -31,6 +32,8 @@ const assets = {
   symbol: "/manus-storage/aseman-symbol_16257107.png",
   partner: "/manus-storage/aseman-partner-current_822bd4f3.png",
   partnerFold: "/manus-storage/aseman-partner-fold_0571f743.png",
+  processPortrait: "/manus-storage/aseman-process-portrait_8611f715.png",
+  ctaGrowth: "/manus-storage/aseman-cta-growth_29994269.png",
 };
 
 const portfolioItems = [
@@ -278,7 +281,7 @@ export default function Home() {
         <div className="hero-content page-container">
           <Reveal className="hero-copy">
             <div className="service-chip"><Sparkles size={16} /> طراحی سایت اختصاصی در مشهد</div>
-            <h1 id="hero-title">سایتی که با رشد کسب‌وکار شما <em>توسعه</em> پیدا می‌کند.</h1>
+            <h1 id="hero-title">سایتی که با رشد کسب‌وکار<br />شما <em>توسعه</em> پیدا می‌کند.</h1>
             <p>تخصص ما طراحی سایت در مشهد با تمرکز بر کیفیت، امنیت، سرعت و ظاهر حرفه‌ای است. هدفمان کمک به رشد و دیده‌شدن کسب‌وکارها در فضای آنلاین است.</p>
             <div className="hero-actions">
               <a className="button button-primary" href="#consultation">مشاوره رایگان <ArrowLeft size={18} /></a>
@@ -325,15 +328,14 @@ export default function Home() {
       <section className="steps-section section-space" id="process">
         <Reveal className="page-container">
           <SectionIntro centered eyebrow="مسیر روشن همکاری" title="مراحل طراحی سایت با آسمان" text="طراحی یک وب‌سایت حرفه‌ای نیازمند برنامه‌ریزی دقیق و اجرای مرحله‌به‌مرحله است. از مشاوره اولیه تا تحویل نهایی، در جریان مسیر پروژه خواهید بود." />
-          <div className="process-track">
-            {steps.map((step, index) => (
-              <motion.article className="process-step" key={step.number} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.08, duration: 0.45 }}>
-                <span className="step-number">{step.number}</span>
-                <h3>{step.title}</h3>
-                <p>{step.text}</p>
-              </motion.article>
-            ))}
-            <div className="process-core"><img src={assets.symbol} alt="نشانه گرافیکی آسمان" /></div>
+          <div className="process-stage">
+            <div className="process-column process-column-right">
+              {[steps[0], steps[2]].map((step, index) => <motion.article className="process-step process-stage-step" key={step.number} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.08, duration: 0.45 }}><span className="step-number">{step.number}</span><h3>{step.title}</h3><p>{step.text}</p></motion.article>)}
+            </div>
+            <motion.div className="process-video-card" initial={{ opacity: 0, scale: .96 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: .5 }}><img src={assets.processPortrait} alt="تصویرسازی فرایند طراحی و توسعه سایت" /><span className="process-video-shine" /><span className="process-video-caption">از ایده تا تحویل</span></motion.div>
+            <div className="process-column process-column-left">
+              {[steps[1], steps[3]].map((step, index) => <motion.article className="process-step process-stage-step" key={step.number} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: (index + 2) * 0.08, duration: 0.45 }}><span className="step-number">{step.number}</span><h3>{step.title}</h3><p>{step.text}</p></motion.article>)}
+            </div>
           </div>
         </Reveal>
       </section>
@@ -374,7 +376,7 @@ export default function Home() {
       <section className="blue-banner section-space" id="consultation">
         <Reveal className="page-container banner-content">
           <div className="banner-copy"><p className="eyebrow eyebrow-light"><span /> آماده شروع یک مسیر حرفه‌ای؟</p><h2>ایده کسب‌وکارتان را به یک سایت حرفه‌ای تبدیل کنیم.</h2><p>برای اطلاعات بیشتر درباره پکیج‌های طراحی سایت در مشهد مناسب شما، با ما در ارتباط باشید.</p><a className="button button-white" href="#contact">مشاوره رایگان <ArrowLeft size={18} /></a></div>
-          <div className="banner-visual"><img src={assets.growth} alt="تصویرسازی رشد و توسعه سایت" /></div>
+          <div className="banner-visual"><img src={assets.ctaGrowth} alt="تصویرسازی رشد و توسعه سایت" /></div>
         </Reveal>
       </section>
 
