@@ -27,7 +27,7 @@ import { motion } from "framer-motion";
 const assets = {
   hero: "/manus-storage/aseman-hero-layered-studio_39678e1d.png",
   integrations: "/manus-storage/aseman-integrations-orbit_6072153c.png",
-  dashboard: "/manus-storage/aseman-management-dashboard_b8ef5fb7.png",
+  dashboard: "/manus-storage/aseman-management-dense_e81c7c59.png",
   growth: "/manus-storage/aseman-growth-services_24bfc6d5.png",
   symbol: "/manus-storage/aseman-symbol_16257107.png",
   partner: "/manus-storage/aseman-partner-current_822bd4f3.png",
@@ -353,7 +353,7 @@ export default function Home() {
 
       <section className="management-section section-space">
         <Reveal className="page-container split-layout split-reverse">
-          <div className="media-panel dashboard-panel parallax-panel"><img src={assets.dashboard} alt="ماکاپ پنل مدیریت سایت" /></div>
+          <div className="media-panel dashboard-panel dashboard-panel-dense parallax-panel"><img src={assets.dashboard} alt="ماکاپ متراکم پنل مدیریت سایت" /></div>
           <div className="split-copy">
             <SectionIntro eyebrow="مدیریت بی‌دردسر" title="مدیریت سایتتان باید ساده باشد، نه وابسته." text="برای راه‌اندازی و مدیریت وب‌سایت، نباید درگیر پیچیدگی‌های فنی شوید. پنل مدیریت مناسب به شما امکان می‌دهد محتوا، بخش‌های قابل ویرایش، فرم‌ها و اطلاعات ضروری سایت را متناسب با نیاز پروژه به‌روزرسانی کنید." />
             <a className="button button-primary button-small" href="#features">امکانات سایت حرفه‌ای <ArrowLeft size={17} /></a>
