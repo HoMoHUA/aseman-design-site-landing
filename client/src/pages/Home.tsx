@@ -13,6 +13,7 @@ import {
   MessagesSquare,
   MoveUpLeft,
   PanelTop,
+  PhoneCall,
   SearchCheck,
   ServerCog,
   ShieldCheck,
@@ -260,6 +261,9 @@ export default function Home() {
           </Reveal>
           <Reveal className="hero-art parallax-hero">
             <div className="hero-art-backdrop" />
+            <div className="hero-vector-layer vector-layer-back" aria-hidden="true" />
+            <div className="hero-vector-layer vector-layer-middle" aria-hidden="true" />
+            <div className="hero-vector-layer vector-layer-front" aria-hidden="true" />
             <div className="hero-orbit orbit-one" /><div className="hero-orbit orbit-two" />
             <img src={assets.hero} alt="تصویرسازی سه‌بعدی طراحی سایت حرفه‌ای" />
             <div className="floating-note note-top"><span className="note-icon"><Zap size={16} /></span><div><strong>عملکرد سریع</strong><small>کدنویسی بهینه</small></div></div>
@@ -388,6 +392,8 @@ export default function Home() {
           <div className="faq-card-wrap"><div className="faq-card-top"><span>پرسش‌های شما</span><div><i /><i /><i /></div></div><div className="faq-native-list">{faqItems.map((item, index) => <details className="faq-native-item" open={index === 0} key={item.question}><summary><span className="faq-index">{String(index + 1).padStart(2, "0")}</span><span>{item.question}</span><b>+</b></summary><div className="faq-native-answer"><p>{item.answer}</p></div></details>)}</div></div>
         </Reveal>
       </section>
+
+      <a className="support-float" href="tel:09120209130" aria-label="تماس با پشتیبانی گروه نرم‌افزاری آسمان"><span className="support-float-icon"><PhoneCall size={20} /></span><span className="support-float-copy"><strong>پشتیبانی و تماس</strong><small>۰۹۱۲۰۲۰۹۱۳۰</small></span></a>
 
     </main>
   );
