@@ -1,6 +1,6 @@
 /* Design reminder: «اطمینان آبی در سه لایه» — روایت فروش‌محور مرجع، فضای روشن، سرمه‌ای #000838، ماکاپ‌های لایه‌ای و حرکت ظریف؛ بدون هدر و فوتر. */
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { useState, type CSSProperties, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import {
   ArrowLeft,
   ArrowUpLeft,
@@ -225,18 +225,49 @@ function SectionIntro({ eyebrow, title, text, centered = false }: { eyebrow?: st
 }
 
 export default function Home() {
-  const [parallax, setParallax] = useState({ x: 0, y: 0 });
   const [activeGuideIndex, setActiveGuideIndex] = useState(0);
+  const shellRef = useRef<HTMLElement>(null);
+  const animationFrame = useRef<number | null>(null);
+  const currentPointer = useRef({ x: 0, y: 0 });
+  const targetPointer = useRef({ x: 0, y: 0 });
   const activeGuide = allGuideSections[activeGuideIndex];
-  const parallaxStyle = { "--px": `${parallax.x}px`, "--py": `${parallax.y}px` } as CSSProperties;
-  const handleParallax = (event: MouseEvent<HTMLElement>) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    setParallax({ x: ((event.clientX - rect.left) / rect.width - .5) * 14, y: ((event.clientY - rect.top) / rect.height - .5) * 12 });
+
+  const animateParallax = () => {
+    const next = currentPointer.current;
+    const target = targetPointer.current;
+    next.x += (target.x - next.x) * 0.075;
+    next.y += (target.y - next.y) * 0.075;
+    shellRef.current?.style.setProperty("--px", `${next.x.toFixed(2)}px`);
+    shellRef.current?.style.setProperty("--py", `${next.y.toFixed(2)}px`);
+    if (Math.abs(target.x - next.x) > 0.03 || Math.abs(target.y - next.y) > 0.03) {
+      animationFrame.current = requestAnimationFrame(animateParallax);
+    } else {
+      animationFrame.current = null;
+    }
   };
 
+  const queueParallax = () => {
+    if (animationFrame.current === null) animationFrame.current = requestAnimationFrame(animateParallax);
+  };
+
+  const handleParallax = (event: MouseEvent<HTMLElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    targetPointer.current = { x: ((event.clientX - rect.left) / rect.width - .5) * 12, y: ((event.clientY - rect.top) / rect.height - .5) * 10 };
+    queueParallax();
+  };
+
+  const resetParallax = () => {
+    targetPointer.current = { x: 0, y: 0 };
+    queueParallax();
+  };
+
+  useEffect(() => () => {
+    if (animationFrame.current !== null) cancelAnimationFrame(animationFrame.current);
+  }, []);
+
   return (
-    <main dir="rtl" className="site-shell" style={parallaxStyle} onMouseMove={handleParallax} onMouseLeave={() => setParallax({ x: 0, y: 0 })}>
-      <section className="hero-section" aria-labelledby="hero-title">
+    <main ref={shellRef} dir="rtl" className="site-shell">
+      <section className="hero-section" aria-labelledby="hero-title" onMouseMove={handleParallax} onMouseLeave={resetParallax}>
         <div className="hero-grain" />
         <div className="hero-ring hero-ring-one" />
         <div className="hero-ring hero-ring-two" />
