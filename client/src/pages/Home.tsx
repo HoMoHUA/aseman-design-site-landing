@@ -140,10 +140,10 @@ const faqItems = [
     question: "هزینه طراحی سایت در مشهد چقدر است؟",
     answer: "هزینه طراحی سایت بسته به نوع وب‌سایت، امکانات مورد نیاز و میزان سفارشی‌سازی متفاوت است و معمولاً از چند میلیون تومان شروع می‌شود.",
   },
-  { question: "مدت زمان طراحی سایت چقدر طول می‌کشد؟", answer: "" },
-  { question: "آیا وب‌سایت‌ها بهینه‌سازی شده برای سئو تحویل داده می‌شوند؟", answer: "" },
-  { question: "بعد از طراحی سایت، پشتیبانی هم ارائه می‌دهید؟", answer: "" },
-  { question: "آیا امکان افزودن امکانات جدید به سایت در آینده وجود دارد؟", answer: "" },
+  { question: "مدت زمان طراحی سایت چقدر طول می‌کشد؟", answer: "زمان اجرا با توجه به دامنه پروژه، تعداد صفحه‌ها و امکانات مورد نیاز تعیین می‌شود. پس از جلسه تحلیل نیاز و مشخص شدن جزئیات، زمان‌بندی مرحله‌ای و شفاف پروژه را ارائه می‌کنیم تا مسیر طراحی، توسعه، تست و تحویل قابل پیگیری باشد." },
+  { question: "آیا وب‌سایت‌ها بهینه‌سازی شده برای سئو تحویل داده می‌شوند؟", answer: "بله. ساختار فنی سایت با توجه به اصول پایه سئو، سرعت بارگذاری، نمایش درست در موبایل، ساختار عنوان‌ها و امکان توسعه محتوایی طراحی می‌شود. برنامه سئو و تولید محتوای مداوم می‌تواند پس از راه‌اندازی، به‌صورت جداگانه ادامه پیدا کند." },
+  { question: "بعد از طراحی سایت، پشتیبانی هم ارائه می‌دهید؟", answer: "بله. پس از تحویل، آموزش مدیریت بخش‌های قابل ویرایش و پشتیبانی فنی مورد نیاز ارائه می‌شود. برای تغییرات، بهبود عملکرد، توسعه قابلیت‌های تازه و نگهداری دوره‌ای نیز می‌توانید روی همراهی تیم آسمان حساب کنید." },
+  { question: "آیا امکان افزودن امکانات جدید به سایت در آینده وجود دارد؟", answer: "بله. ساختار سایت اختصاصی به‌گونه‌ای طراحی می‌شود که همراه با رشد کسب‌وکار توسعه پیدا کند. اتصال به درگاه پرداخت، سامانه پیامک، CRM، گزارش‌گیری، فرم‌های جدید یا هر قابلیت متناسب با فرایند کاری شما در آینده قابل برنامه‌ریزی و اجراست." },
 ];
 
 const detailedLegacySections = [
@@ -198,7 +198,6 @@ const detailedLegacySections = [
 ];
 
 const allGuideSections = [...guideSections, ...detailedLegacySections].map((section, index) => ({ ...section, index }));
-const guideColumns = [allGuideSections.filter((_, index) => index % 2 === 0), allGuideSections.filter((_, index) => index % 2 === 1)];
 
 function Reveal({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
@@ -230,6 +229,8 @@ function FallingLeaves({ className = "" }: { className?: string }) {
 
 export default function Home() {
   const [parallax, setParallax] = useState({ x: 0, y: 0 });
+  const [activeGuideIndex, setActiveGuideIndex] = useState(0);
+  const activeGuide = allGuideSections[activeGuideIndex];
   const parallaxStyle = { "--px": `${parallax.x}px`, "--py": `${parallax.y}px` } as CSSProperties;
   const handleParallax = (event: MouseEvent<HTMLElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -340,8 +341,8 @@ export default function Home() {
 
       <section className="blue-banner section-space" id="consultation">
         <Reveal className="page-container banner-content">
-          <div><p className="eyebrow eyebrow-light"><span /> آماده شروع یک مسیر حرفه‌ای؟</p><h2>ایده کسب‌وکارتان را به یک سایت حرفه‌ای تبدیل کنیم.</h2><p>برای اطلاعات بیشتر درباره پکیج‌های طراحی سایت در مشهد مناسب شما، با ما در ارتباط باشید.</p><a className="button button-white" href="#contact">مشاوره رایگان <ArrowLeft size={18} /></a></div>
-          <img src={assets.growth} alt="تصویرسازی رشد و توسعه سایت" />
+          <div className="banner-copy"><p className="eyebrow eyebrow-light"><span /> آماده شروع یک مسیر حرفه‌ای؟</p><h2>ایده کسب‌وکارتان را به یک سایت حرفه‌ای تبدیل کنیم.</h2><p>برای اطلاعات بیشتر درباره پکیج‌های طراحی سایت در مشهد مناسب شما، با ما در ارتباط باشید.</p><a className="button button-white" href="#contact">مشاوره رایگان <ArrowLeft size={18} /></a></div>
+          <div className="banner-visual"><img src={assets.growth} alt="تصویرسازی رشد و توسعه سایت" /></div>
         </Reveal>
       </section>
 
@@ -349,7 +350,7 @@ export default function Home() {
         <Reveal className="page-container">
           <SectionIntro eyebrow="پروژه‌هایی با هدف واقعی" title="نمونه‌کارهای طراحی سایت آسمان" text="هر پروژه فرصتی است تا با دقت و خلاقیت، سایتی منحصربه‌فرد برای یک کسب‌وکار بسازیم؛ سایتی که علاوه بر ظاهر حرفه‌ای، عملکرد و تجربه کاربری مناسبی هم داشته باشد." />
           <div className="portfolio-rail">
-            {portfolioItems.map((item, index) => <motion.article className={`portfolio-card parallax-card portfolio-card-${index + 1}`} key={item.title} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * .08, duration: .48 }}><div className="portfolio-browser"><span /><span /><span /></div><div className="portfolio-art"><img src={item.image} alt={item.title} /><div className="portfolio-sheen" /></div><div className="portfolio-info"><p>{item.type}</p><h3>{item.title}</h3><span>{item.description}</span><a href="#consultation" aria-label={`مشاهده نمونه‌های ${item.title}`}><ArrowUpLeft size={19} /></a></div></motion.article>)}
+            {portfolioItems.map((item, index) => <motion.article className={`portfolio-card parallax-card portfolio-card-${index + 1}`} key={item.title} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * .08, duration: .48 }}><div className="portfolio-browser"><span /><span /><span /></div><div className="portfolio-art"><img src={item.image} alt={item.title} /><div className="portfolio-sheen" /></div><div className="portfolio-info"><p>{item.type}</p><h3>{item.title}</h3><span>{item.description}</span><a className="portfolio-link" href="#consultation" aria-label={`مشاهده نمونه‌های ${item.title}`}><span>مشاهده</span><ArrowUpLeft size={16} /></a></div></motion.article>)}
           </div>
           <a className="button button-secondary portfolio-cta" href="#consultation">مشاهده نمونه‌کارهای بیشتر <ArrowLeft size={18} /></a>
         </Reveal>
@@ -381,7 +382,7 @@ export default function Home() {
         <div className="garden-orb orb-guide-one" aria-hidden="true" /><div className="garden-orb orb-guide-two" aria-hidden="true" />
         <Reveal className="page-container guide-layout">
           <div className="guide-sticky"><div className="question-orb"><span>؟</span><i /><i /><i /></div><p className="eyebrow"><span /> راهنمای کامل آسمان</p><h2>هر سؤال، شروع یک مسیر روشن است.</h2><p>تمامی نکات مهمی که باید درباره طراحی سایت در مشهد بدانید، از تعرفه و انواع سایت تا فناوری، فرایند همکاری و کسب‌وکارهای مناسب.</p><div className="guide-note"><Sparkles size={18} /><span>یکی از عنوان‌ها را باز کنید و پاسخ متناسب با مسیر کسب‌وکارتان را بخوانید.</span></div><a className="text-link text-link-light" href="#consultation">برای انتخاب مسیر درست، مشاوره بگیرید <ArrowLeft size={18} /></a></div>
-          <div className="knowledge-stack"><div className="stack-label"><span>نقشه دانستنی‌ها</span><b>۲۴ پاسخ کاربردی</b></div><div className="guide-columns">{guideColumns.map((column, columnIndex) => <Accordion type="single" collapsible className="guide-accordion" defaultValue={columnIndex === 0 ? "guide-0" : undefined} key={columnIndex}>{column.map((section) => <AccordionItem value={`guide-${section.index}`} key={section.title}><AccordionTrigger><span className="guide-count">{String(section.index + 1).padStart(2, "0")}</span>{section.title}</AccordionTrigger><AccordionContent><p>{section.content}</p></AccordionContent></AccordionItem>)}</Accordion>)}</div></div>
+          <div className="knowledge-stack"><div className="stack-label"><span>نقشه دانستنی‌ها</span><b>۲۴ پاسخ کاربردی</b></div><div className="guide-explorer"><div className="guide-topic-grid">{allGuideSections.map((section) => <button type="button" className={section.index === activeGuideIndex ? "guide-topic is-active" : "guide-topic"} onClick={() => setActiveGuideIndex(section.index)} key={section.title}><span>{String(section.index + 1).padStart(2, "0")}</span>{section.title}</button>)}</div><article className="guide-detail"><div className="guide-detail-label"><span>موضوع انتخاب‌شده</span><b>{String(activeGuide.index + 1).padStart(2, "0")}</b></div><h3>{activeGuide.title}</h3><p>{activeGuide.content}</p></article></div></div>
         </Reveal>
       </section>
 
