@@ -376,16 +376,6 @@ export default function Home() {
         </Reveal>
       </section>
 
-      <section className="final-cta" id="contact">
-        <Reveal className="page-container final-cta-inner">
-          <img src={assets.symbol} alt="نشانه گرافیکی گروه نرم‌افزاری آسمان" />
-          <p className="eyebrow eyebrow-light"><span /> گام بعدی روشن است</p>
-          <h2>آینده آنلاین کسب‌وکار شما، با انتخاب درست آغاز می‌شود.</h2>
-          <p>اگر به دنبال حضور مؤثر، پایدار و حرفه‌ای در فضای آنلاین هستید، درباره مسیر درست طراحی سایتتان با گروه نرم‌افزاری آسمان صحبت کنید.</p>
-          <div className="hero-actions"><a className="button button-white" href="tel:09120209130">تماس برای مشاوره <ArrowLeft size={18} /></a><a className="button button-ghost-light" href="mailto:info@i-aseman.ir">ارسال درخواست <ArrowUpLeft size={18} /></a></div>
-          <div className="contact-strip"><span>خیابان فردوسی - بین فردوسی ۲ و ۴</span><a href="mailto:info@i-aseman.ir">info@i-aseman.ir</a><a href="tel:37668711">۳۷۶۶۸۷۱۱</a><a href="tel:09120209130">۰۹۱۲۰۲۰۹۱۳۰</a></div>
-        </Reveal>
-      </section>
     </main>
   );
 }
