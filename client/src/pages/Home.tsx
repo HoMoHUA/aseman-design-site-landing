@@ -393,7 +393,7 @@ export default function Home() {
         </Reveal>
       </section>
 
-      <a className="support-float" href="tel:09120209130" aria-label="تماس با پشتیبانی گروه نرم‌افزاری آسمان"><span className="support-float-icon"><PhoneCall size={20} /></span><span className="support-float-copy"><strong>پشتیبانی و تماس</strong><small>۰۹۱۲۰۲۰۹۱۳۰</small></span></a>
+      <a className="support-float" href="tel:09120209130" aria-label="تماس با پشتیبانی گروه نرم‌افزاری آسمان" data-tooltip="پشتیبانی و تماس — ۰۹۱۲۰۲۰۹۱۳۰"><span className="support-float-icon"><PhoneCall size={22} /></span><span className="support-float-copy"><strong>پشتیبانی و تماس</strong><small>۰۹۱۲۰۲۰۹۱۳۰</small></span></a>
 
     </main>
   );
