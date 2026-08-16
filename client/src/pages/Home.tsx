@@ -26,7 +26,6 @@ import { motion } from "framer-motion";
 /* Design reminder: آبی و سرمه‌ای هویت اصلی هستند؛ زرد و نارنجی فقط برای تأکیدهای کوچک، مسیرهای کلیدی و تعامل‌ها استفاده می‌شوند. */
 const assets = {
   hero: "/manus-storage/aseman-hero-layered-studio_39678e1d.png",
-  heroSoft: "/manus-storage/aseman-hero-soft-architecture_e161e1f1.png",
   integrations: "/manus-storage/aseman-integrations-orbit_6072153c.png",
   dashboard: "/manus-storage/aseman-management-light-dense_305b37f0.png",
   growth: "/manus-storage/aseman-growth-services_24bfc6d5.png",
@@ -288,7 +287,6 @@ export default function Home() {
             </div>
           </Reveal>
           <Reveal className="hero-art parallax-hero">
-            <div className="hero-floor" aria-hidden="true" style={{ backgroundImage: `url(${assets.heroSoft})` }} />
             <div className="hero-laptop"><img src={assets.hero} alt="تصویرسازی سه‌بعدی طراحی سایت حرفه‌ای" /></div>
             <div className="hero-ui-layer" aria-hidden="true"><div className="hero-ui-panel hero-ui-panel-top"><span /><b>آماده برای رشد</b><i /></div><div className="hero-ui-panel hero-ui-panel-bottom"><Zap size={15} /><strong>عملکرد سریع</strong></div></div>
           </Reveal>
