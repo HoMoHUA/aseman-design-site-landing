@@ -26,14 +26,15 @@ import { motion } from "framer-motion";
 /* Design reminder: آبی و سرمه‌ای هویت اصلی هستند؛ زرد و نارنجی فقط برای تأکیدهای کوچک، مسیرهای کلیدی و تعامل‌ها استفاده می‌شوند. */
 const assets = {
   hero: "/manus-storage/aseman-hero-layered-studio_39678e1d.png",
+  heroSoft: "/manus-storage/aseman-hero-soft-architecture_e161e1f1.png",
   integrations: "/manus-storage/aseman-integrations-orbit_6072153c.png",
-  dashboard: "/manus-storage/aseman-management-dense_e81c7c59.png",
+  dashboard: "/manus-storage/aseman-management-light-dense_305b37f0.png",
   growth: "/manus-storage/aseman-growth-services_24bfc6d5.png",
   symbol: "/manus-storage/aseman-symbol_16257107.png",
   partner: "/manus-storage/aseman-partner-current_822bd4f3.png",
   partnerFold: "/manus-storage/aseman-partner-fold_0571f743.png",
   processPortrait: "/manus-storage/aseman-process-portrait_8611f715.png",
-  ctaGrowth: "/manus-storage/aseman-cta-growth_29994269.png",
+  ctaGrowth: "/manus-storage/aseman-cta-growth-transparent_3edbe05b.png",
 };
 
 const portfolioItems = [
@@ -271,6 +272,7 @@ export default function Home() {
   return (
     <main ref={shellRef} dir="rtl" className="site-shell">
       <section className="hero-section" aria-labelledby="hero-title" onMouseMove={handleParallax} onMouseLeave={resetParallax}>
+        <div className="hero-soft-architecture" aria-hidden="true" style={{ backgroundImage: `url(${assets.heroSoft})` }} />
         <div className="hero-grain" />
         <div className="hero-ring hero-ring-one" />
         <div className="hero-ring hero-ring-two" />
@@ -361,6 +363,13 @@ export default function Home() {
         </Reveal>
       </section>
 
+      <section className="blue-banner section-space" id="consultation">
+        <Reveal className="page-container banner-content">
+          <div className="banner-copy"><p className="eyebrow eyebrow-light"><span /> آماده شروع یک مسیر حرفه‌ای؟</p><h2>ایده کسب‌وکارتان را به یک سایت حرفه‌ای تبدیل کنیم.</h2><p>برای اطلاعات بیشتر درباره پکیج‌های طراحی سایت در مشهد مناسب شما، با ما در ارتباط باشید.</p><a className="button button-white" href="#contact">مشاوره رایگان <ArrowLeft size={18} /></a></div>
+          <div className="banner-visual"><img src={assets.ctaGrowth} alt="تصویرسازی رشد و توسعه سایت" /></div>
+        </Reveal>
+      </section>
+
       <section className="features-section section-space" id="features">
         <Reveal className="page-container">
           <SectionIntro centered eyebrow="امکانات قابل توسعه" title="امکانات یک سایت اختصاصی حرفه‌ای" text="سایت اختصاصی از ابتدا برای رشد کسب‌وکار شما ساخته می‌شود؛ بنابراین هر بخش با هدف مشخص و قابلیت توسعه در آینده طراحی خواهد شد." />
@@ -370,13 +379,6 @@ export default function Home() {
               return <motion.article className="feature-card" key={feature.title} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: (index % 4) * 0.05, duration: 0.4 }}><Icon size={22} /><div><h3>{feature.title}</h3><p>{feature.text}</p></div></motion.article>;
             })}
           </div>
-        </Reveal>
-      </section>
-
-      <section className="blue-banner section-space" id="consultation">
-        <Reveal className="page-container banner-content">
-          <div className="banner-copy"><p className="eyebrow eyebrow-light"><span /> آماده شروع یک مسیر حرفه‌ای؟</p><h2>ایده کسب‌وکارتان را به یک سایت حرفه‌ای تبدیل کنیم.</h2><p>برای اطلاعات بیشتر درباره پکیج‌های طراحی سایت در مشهد مناسب شما، با ما در ارتباط باشید.</p><a className="button button-white" href="#contact">مشاوره رایگان <ArrowLeft size={18} /></a></div>
-          <div className="banner-visual"><img src={assets.ctaGrowth} alt="تصویرسازی رشد و توسعه سایت" /></div>
         </Reveal>
       </section>
 
