@@ -272,14 +272,6 @@ export default function Home() {
   return (
     <main ref={shellRef} dir="rtl" className="site-shell">
       <section className="hero-section" aria-labelledby="hero-title" onMouseMove={handleParallax} onMouseLeave={resetParallax}>
-        <div className="hero-soft-architecture" aria-hidden="true" style={{ backgroundImage: `url(${assets.heroSoft})` }} />
-        <div className="hero-grain" />
-        <div className="hero-ring hero-ring-one" />
-        <div className="hero-ring hero-ring-two" />
-        <div className="vector-field" aria-hidden="true">
-          <i className="vector-line vector-line-a" /><i className="vector-line vector-line-b" /><i className="vector-line vector-line-c" />
-          <b className="vector-node node-a" /><b className="vector-node node-b" /><b className="vector-node node-c" /><b className="vector-node node-d" />
-        </div>
         <div className="hero-content page-container">
           <Reveal className="hero-copy">
             <div className="service-chip"><Sparkles size={16} /> طراحی سایت اختصاصی در مشهد</div>
@@ -296,15 +288,9 @@ export default function Home() {
             </div>
           </Reveal>
           <Reveal className="hero-art parallax-hero">
-            <div className="hero-art-backdrop" />
-            <div className="hero-vector-layer vector-layer-back" aria-hidden="true" />
-            <div className="hero-vector-layer vector-layer-middle" aria-hidden="true" />
-            <div className="hero-vector-layer vector-layer-front" aria-hidden="true" />
-            <div className="hero-ui-layer" aria-hidden="true"><span className="hero-ui-dot" /><span className="hero-ui-line hero-ui-line-wide" /><span className="hero-ui-line" /><div className="hero-ui-cards"><i /><i /><i /></div></div>
-            <div className="hero-orbit orbit-one" /><div className="hero-orbit orbit-two" />
-            <img src={assets.hero} alt="تصویرسازی سه‌بعدی طراحی سایت حرفه‌ای" />
-            <div className="floating-note note-top"><span className="note-icon"><Zap size={16} /></span><div><strong>عملکرد سریع</strong><small>کدنویسی بهینه</small></div></div>
-            <div className="floating-note note-bottom"><span className="note-icon"><ShieldCheck size={16} /></span><div><strong>امنیت پایدار</strong><small>ساختار استاندارد</small></div></div>
+            <div className="hero-floor" aria-hidden="true" style={{ backgroundImage: `url(${assets.heroSoft})` }} />
+            <div className="hero-laptop"><img src={assets.hero} alt="تصویرسازی سه‌بعدی طراحی سایت حرفه‌ای" /></div>
+            <div className="hero-ui-layer" aria-hidden="true"><div className="hero-ui-panel hero-ui-panel-top"><span /><b>آماده برای رشد</b><i /></div><div className="hero-ui-panel hero-ui-panel-bottom"><Zap size={15} /><strong>عملکرد سریع</strong></div></div>
           </Reveal>
         </div>
       </section>
